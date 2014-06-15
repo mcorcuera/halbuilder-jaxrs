@@ -26,7 +26,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 
 /**
- *
+ * 
  * @author Mikel Corcuera <mik.corcuera@gmail.com>
  */
 public class HalUnmarshaller {

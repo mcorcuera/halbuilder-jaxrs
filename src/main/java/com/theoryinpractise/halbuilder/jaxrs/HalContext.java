@@ -30,7 +30,20 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 /**
- *
+ * Base class of the JAX-RS Extension for the HalBuilder API. It serves the
+ * available {@link RepresentationFactory} to use, creates new <code>Representations</code>
+ * and also provides utilites to register <code>PropertyBuilders</code> for unmarshalling
+ * HAL representations.
+ * <p>
+ * It comes with the following <code>PropertyBuilders</code>:
+ * <ul>
+ *      <li>{@link LongBuilder}: builds {@link Long} objects </li>
+ *      <li> {@link IntegerBuilder}: builds {@link Integer} objects </li>
+ *      <li> {@link StringBuilder}: builds {@link String} objects </li>
+ *      <li> {@link DateBuilder}: builds {@link java.util.Date} objects </li>
+ *      <li> {@link SqlDateBuilder}: builds {@link java.sql.Date} </li>
+ * </ul>
+ * </p>
  * @author Mikel Corcuera <mik.corcuera@gmail.com>
  */
 public class HalContext {
@@ -56,26 +69,53 @@ public class HalContext {
         registerPropertyBuilder( new DateBuilder());
      }
      
-     public static RepresentationFactory getRepresentationFactory()
+    /**
+     * Provides the HAL <code>RepresentationFactory</code> used to write and read
+     * representations.
+     * @return The RepresentationFactory in use
+     */
+    public static RepresentationFactory getRepresentationFactory()
      {
          return rp;
      }
      
-     public static Representation getNewRepresentation()
+    /**
+     * Creates a new <code>Representation</code> from the <code>RepresentationFactory</code>
+     * @return A new <code>Representation</code>
+     */
+    public static Representation getNewRepresentation()
      {
          return rp.newRepresentation();
      
      }
      
-     public static void registerPropertyBuilder( PropertyBuilder p)
+    /**
+     * Register a new {@link PropertyBuilder} for HAL unmarshalling. This function
+     * replaces the {@link PropertyBuilder} for the same type if is already
+     * present.
+     * @param builder The {@link PropertyBuilder} to register
+     * @see PorpertyBuilder HalUnmarshaller
+     */
+    public static void registerPropertyBuilder( PropertyBuilder builder)
      {
-         if( builders.get(p.getBuildType().toString()) != null) {
-             builders.remove( p.getBuildType().toString());
+         if( builders.get(builder.getBuildType().toString()) != null) {
+             builders.remove( builder.getBuildType().toString());
          }
-         builders.put( p.getBuildType().toString(), p);
+         builders.put( builder.getBuildType().toString(), builder);
      }
-     
-     public static PropertyBuilder getPropertyBuilder( Class type)
+    
+    /**
+     * Returns the registered {@link PropertyBuilder} to uses with the provided
+     * type. 
+     * <p>
+     * First it searches for direct matches using {@link PropertyBuilder#getBuildType()},
+     * and if there is no match, it searches for a suitable builder using {@link PropertyBuilder#canBuild(java.lang.Class)}
+     * </p>
+     * @param type The {@link Class} of the property to build
+     * @return The {@link PropertyBuilder} that can build objects of the type provided. Returns <code>null</code> if ther is no match
+     *          
+     */
+    public static PropertyBuilder getPropertyBuilder( Class type)
      {
          PropertyBuilder p = builders.get( type.toString());
          
