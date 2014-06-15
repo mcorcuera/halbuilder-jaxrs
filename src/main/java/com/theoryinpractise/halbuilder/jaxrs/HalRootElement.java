@@ -23,7 +23,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- *
+ * The <code> @HalRootElement </code> identifies the root element of a HAL 
+ * representable resource.
+ * <p>
+ * It can only be used in a top level class and has no values. The object must
+ * be a valid Java Bean with a no-argument constructor
+ * </p>
  * @author Mikel Corcuera <mik.corcuera@gmail.com>
  */
 

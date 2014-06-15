@@ -23,13 +23,22 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- *
+ * The <code>@HalLink</code> annotation is used to identify methods that return 
+ * links related to the object.
+ * <p>
+ * It can only be used in a field.
+ * <p>
+ * @see HalSelfLink
  * @author Mikel Corcuera <mik.corcuera@gmail.com>
  */
 
 @Retention( RetentionPolicy.RUNTIME)
 @Target( ElementType.METHOD)
 public @interface HalLink {
-    
+
+    /**
+     * The name of the link on the HAL representation
+     * @return The name of the link
+     */
     String value();
 }

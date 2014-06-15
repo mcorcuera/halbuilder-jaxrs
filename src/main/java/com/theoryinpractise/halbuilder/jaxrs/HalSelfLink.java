@@ -23,7 +23,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- *
+ * The <code>@HalSelfLink</code> annotations identifies methods that return
+ * the link to the object representation.
+ * <p>
+ * It can only be used in a method and has no parameters
+ * </p>
+ * @see HalLink
  * @author Mikel Corcuera <mik.corcuera@gmail.com>
  */
 @Retention( RetentionPolicy.RUNTIME)

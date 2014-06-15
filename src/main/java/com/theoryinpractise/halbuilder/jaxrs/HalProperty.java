@@ -23,7 +23,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- *
+ * The <code>@HalProperty</code> annotation identifies fields that will be 
+ * present in the HAL representation.
+ * 
+ * <p>
+ * It can only be used in a field. The fields annotated using this tag must 
+ * have proper Java Beans getters and setters.
+ * </p>
  * @author Mikel Corcuera <mik.corcuera@gmail.com>
  */
 
@@ -32,8 +38,18 @@ import java.lang.annotation.Target;
 @Target( ElementType.FIELD)
 public @interface HalProperty {
     
+    /**
+     * The name to show in the HAL representation of the Object
+     * @return The name of the HAL property
+     */
     String name();
         
-    boolean onlyRead() default false;
+    /**
+     * Set the field to be only for input pourposes. If <code>true</code>,
+     * the output representation of the object will not have the value of the 
+     * field althoug it can be read from an input HAL representation
+     * @return True if the value is only present for input, false otherwise
+     */
+    boolean input() default false;
     
 }

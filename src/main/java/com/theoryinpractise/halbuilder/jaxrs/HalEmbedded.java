@@ -23,12 +23,21 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- *
+ * The <code>@HalEmbedded</code> annotation identifies elements that correspond
+ * to embedded resources of the root element. They will only be added to the HAL
+ * representation if they are not null.
+ * <p>
+ * It can only be used over field.
+ * </p>
  * @author Mikel Corcuera <mik.corcuera@gmail.com>
  */
 @Retention( RetentionPolicy.RUNTIME)
 @Target( ElementType.FIELD)
 public @interface HalEmbedded {
     
-    String name();
+    /**
+     * The name of the embedded element on the HAL representation
+     * @return The name of the element
+     */
+    String value();
 }

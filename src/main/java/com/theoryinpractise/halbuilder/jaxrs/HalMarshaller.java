@@ -70,7 +70,7 @@ public class HalMarshaller {
                 /*
                 * Include only annotated fields
                 */
-                if( property != null && property.onlyRead() == false ) {
+                if( property != null && property.input() == false ) {
                     /*
                     * Use getter to access field value
                     */
@@ -91,10 +91,10 @@ public class HalMarshaller {
                             * Add every element of a List
                             */
                             for( final Object ob : (List) embeddedObject) {
-                                rep.withRepresentation( embedded.name(), getRepresentation( ob));
+                                rep.withRepresentation( embedded.value(), getRepresentation( ob));
                             }
                         }else {
-                            rep.withRepresentation( embedded.name(), getRepresentation( embeddedObject));
+                            rep.withRepresentation( embedded.value(), getRepresentation( embeddedObject));
                         }
                     }
                 }
