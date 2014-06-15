@@ -43,3 +43,13 @@ The available annotations are:
 * ```@HalEmbedded```  Denotes a object field that represents a HAL embedded object
 * ```@HalSelfLink```  Denotes a object method that generates the link to the resource
 * ```@HalLink```  Denotes a object method that generates other links related to the resource
+
+### Marshalling and Unmarshalling
+To marshal or unmarshal objects ```HalMarshaller``` and ```HalUnmarshaller``` will be used:
+
+#### Marhsalling
+```HalMarshaller.marshal```  is used to marshalling. It takes the object, the media type and an ``` OutputStrema ```  as input parameters:
+```java
+Resource r = new Resource( 124L, "John", "1991-03-18");
+HalMarshaller.marshal( r, RepresentationFactory.HAL_JSON, System.out);
+``` 
