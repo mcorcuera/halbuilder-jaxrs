@@ -48,8 +48,19 @@ The available annotations are:
 To marshal or unmarshal objects ```HalMarshaller``` and ```HalUnmarshaller``` will be used:
 
 #### Marhsalling
-```HalMarshaller.marshal```  is used to marshalling. It takes the object, the media type and an ``` OutputStrema ```  as input parameters:
+```HalMarshaller.marshal```  is used for marshalling. It takes the object, the media type and an ``` OutputStream ```  as input parameters:
 ```java
 Resource r = new Resource( 124L, "John", "1991-03-18");
 HalMarshaller.marshal( r, RepresentationFactory.HAL_JSON, System.out);
 ``` 
+### Unmarshalling
+```HalUnmarshaller.unmarshal```  is used for unmarshalling. It takes the object type an ``` InputStream ```  as input parameters:
+
+Resource r1 = new Resource( 124L, "John Doe", Date.valueOf("1991-03-18"));
+        
+String representation = HalContext.getNewRepresentation().withBean(r1).toString( RepresentationFactory.HAL_JSON);
+                
+Resource r2 = null;
+InputStream is = new ByteArrayInputStream( representation.getBytes(StandardCharsets.UTF_8));
+      
+r2 = (Resource) HalUnmarshaller.unmarshal(is, Resource.class);
