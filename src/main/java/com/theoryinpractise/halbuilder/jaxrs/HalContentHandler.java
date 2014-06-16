@@ -17,27 +17,15 @@
 
 package com.theoryinpractise.halbuilder.jaxrs;
 
-import com.theoryinpractise.halbuilder.api.ReadableRepresentation;
-import com.theoryinpractise.halbuilder.api.Representation;
-import com.theoryinpractise.halbuilder.api.RepresentationException;
-import com.theoryinpractise.halbuilder.api.RepresentationFactory;
-import com.theoryinpractise.halbuilder.standard.StandardRepresentationFactory;
-import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.lang.reflect.Type;
-import java.util.List;
 import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.MessageBodyReader;
 import javax.ws.rs.ext.MessageBodyWriter;
 import javax.ws.rs.ext.Provider;
@@ -60,7 +48,7 @@ public class HalContentHandler implements MessageBodyWriter, MessageBodyReader<O
     public boolean isWriteable(Class aClass, Type type, Annotation[] annotations, MediaType mediaType) {
         
         /*
-        * Check if the object to write is a Java Bean annotated with HALRootElement
+        * Check if the object to write is a Java Bean annotated with HalRootElement
         */
         return aClass.isAnnotationPresent( HalRootElement.class) 
                 && (mediaType.isCompatible(HAL_JSON_TYPE) || mediaType.isCompatible(HAL_XML_TYPE));

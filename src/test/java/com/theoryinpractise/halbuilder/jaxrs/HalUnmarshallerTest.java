@@ -64,7 +64,7 @@ public class HalUnmarshallerTest {
         
         System.out.println("unmarshal");
         
-        Resource r1 = new Resource( 124L, "Mikel", Date.valueOf("1991-03-18"));
+        Resource r1 = new Resource( 124L, "John Doe", Date.valueOf("1991-03-18"));
         
         String representation = HalContext.getNewRepresentation().withBean(r1).toString( RepresentationFactory.HAL_JSON);
                 
