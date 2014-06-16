@@ -35,6 +35,7 @@ public class Resource {
     
     /* Constructors, getters and setters....*/
     ...
+}
 ```    
 The available annotations are:
 
@@ -70,7 +71,7 @@ r2 = (Resource) HalUnmarshaller.unmarshal(is, Resource.class);
 ### JAX-RS integration
 This libary also provides a content handler, ``` HalContentHandler ``` for JAX-RS based applications. It implements both ```MessageBodyWriter``` and ````MessageBodyReader```` interfaces. Once is registered as a Provider in the configuration the following code consumes and produces HAL representations transparently:
 
-```
+```java
 ...
 @GET
 @Path("/resources/{id}"
@@ -91,6 +92,4 @@ public void saveResource( Resource r) {
         Store resource into database
     */
 }
-```
-
 ```
