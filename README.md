@@ -55,7 +55,7 @@ Resource r = new Resource( 124L, "John", "1991-03-18");
 HalMarshaller.marshal( r, RepresentationFactory.HAL_JSON, System.out);
 ``` 
 #### Unmarshalling
-```HalUnmarshaller.unmarshal```  is used for unmarshalling. It takes the object type an ``` InputStream ```  as input parameters:
+```HalUnmarshaller.unmarshal```  is used for unmarshalling. It takes the object type and an ``` InputStream ```  as input parameters:
 
 ```java
 Resource r1 = new Resource( 124L, "John Doe", Date.valueOf("1991-03-18"));
