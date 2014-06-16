@@ -54,7 +54,7 @@ To marshal or unmarshal objects ```HalMarshaller``` and ```HalUnmarshaller``` wi
 Resource r = new Resource( 124L, "John", "1991-03-18");
 HalMarshaller.marshal( r, RepresentationFactory.HAL_JSON, System.out);
 ``` 
-### Unmarshalling
+#### Unmarshalling
 ```HalUnmarshaller.unmarshal```  is used for unmarshalling. It takes the object type an ``` InputStream ```  as input parameters:
 
 ```java
