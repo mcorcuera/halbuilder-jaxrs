@@ -37,12 +37,22 @@ public class HalMarshaller {
     
     public static void marshal( Object o, Set<URI> flags, MediaType mediaType, OutputStream os) throws Exception
     {
+        marshal( o, flags, mediaType.toString(), os);
+    }
+    
+    public static void marshal( Object o, Set<URI> flags, String mediaType, OutputStream os) throws Exception
+    {
         Representation representation = getRepresentation( o);
         
-        representation.toString( mediaType.toString(), flags, new OutputStreamWriter( os));
+        representation.toString( mediaType, flags, new OutputStreamWriter( os));
     }
     
     public static void marshal( Object o, MediaType mediaType, OutputStream os) throws Exception
+    {
+        marshal( o, null, mediaType, os);
+    }
+    
+     public static void marshal( Object o, String mediaType, OutputStream os) throws Exception
     {
         marshal( o, null, mediaType, os);
     }

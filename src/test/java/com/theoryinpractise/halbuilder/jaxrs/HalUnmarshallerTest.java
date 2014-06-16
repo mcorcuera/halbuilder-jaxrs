@@ -19,6 +19,7 @@ package com.theoryinpractise.halbuilder.jaxrs;
 
 import com.theoryinpractise.halbuilder.api.RepresentationFactory;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
@@ -64,15 +65,17 @@ public class HalUnmarshallerTest {
         
         System.out.println("unmarshal");
         
-        Resource r1 = new Resource( 124L, "John Doe", Date.valueOf("1991-03-18"));
-        
-        String representation = HalContext.getNewRepresentation().withBean(r1).toString( RepresentationFactory.HAL_JSON);
-                
+        Resource r1 = new Resource( 124L, new Name("John", "Doe"), Date.valueOf("1991-03-18"));
         Resource r2 = null;
-        InputStream is = new ByteArrayInputStream( representation.getBytes(StandardCharsets.UTF_8));
-        Object expResult = r1;
+        
         try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            HalMarshaller.marshal(r1, RepresentationFactory.HAL_JSON, baos);
+            String representation = baos.toString( "UTF-8");
             
+            InputStream is = new ByteArrayInputStream( representation.getBytes(StandardCharsets.UTF_8));
+            Object expResult = r1;
+            HalContext.registerPropertyBuilder( new NameBuilder());
             r2 = (Resource) HalUnmarshaller.unmarshal(is, Resource.class);
         } catch (Exception ex) {
             Logger.getLogger(HalUnmarshallerTest.class.getName()).log(Level.SEVERE, null, ex);

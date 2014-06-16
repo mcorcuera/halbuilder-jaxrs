@@ -24,9 +24,9 @@ package com.theoryinpractise.halbuilder.jaxrs.builders;
 public class StringBuilder implements PropertyBuilder<String>{
 
     @Override
-    public String build(String s) 
+    public String build(Object s) 
     {
-        return s;
+        return (String)s;
     }
 
     @Override

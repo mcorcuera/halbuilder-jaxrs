@@ -24,8 +24,8 @@ package com.theoryinpractise.halbuilder.jaxrs.builders;
 public class IntegerBuilder implements PropertyBuilder<Integer>{
 
     @Override
-    public Integer build(String s) {
-        return Integer.parseInt(s);
+    public Integer build(Object s) {
+        return Integer.parseInt( (String) s);
     }
 
     @Override

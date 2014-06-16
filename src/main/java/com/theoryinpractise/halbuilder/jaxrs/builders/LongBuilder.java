@@ -24,9 +24,9 @@ package com.theoryinpractise.halbuilder.jaxrs.builders;
 public class LongBuilder implements PropertyBuilder<Long>{
 
     @Override
-    public Long build(String s) 
+    public Long build(Object s) 
     {
-        return Long.parseLong(s);
+        return Long.parseLong( (String) s);
     }
 
     @Override

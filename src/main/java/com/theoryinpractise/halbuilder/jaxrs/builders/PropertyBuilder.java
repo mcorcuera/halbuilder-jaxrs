@@ -18,6 +18,7 @@
 package com.theoryinpractise.halbuilder.jaxrs.builders;
 
 import com.theoryinpractise.halbuilder.api.ReadableRepresentation;
+import com.theoryinpractise.halbuilder.api.RepresentationException;
 
 /**
  *
@@ -25,7 +26,7 @@ import com.theoryinpractise.halbuilder.api.ReadableRepresentation;
  */
 public interface PropertyBuilder<T> {
         
-    public T build( String s);
+    public T build( Object s) throws BuilderException;
     
     public boolean canBuild( Class type);
     

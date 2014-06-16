@@ -17,27 +17,10 @@
 
 package com.theoryinpractise.halbuilder.jaxrs.builders;
 
-import java.sql.Date;
-
 /**
  *
  * @author Mikel Corcuera <mik.corcuera@gmail.com>
  */
-public class SqlDateBuilder implements PropertyBuilder<Date>{
-
-    @Override
-    public Date build(Object s) {
-        return Date.valueOf( (String)s);
-    }
-
-    @Override
-    public boolean canBuild(Class type) {
-        return Date.class.isAssignableFrom(type);
-    }
-
-    @Override
-    public Class getBuildType() {
-        return Date.class;
-    }
+public class BuilderException extends Exception{
     
 }

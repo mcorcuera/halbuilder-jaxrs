@@ -29,17 +29,17 @@ public class Resource {
 
     @HalProperty( name="id")
     private Long id;
-    @HalProperty( name="name")
-    private String name;
     @HalProperty( name="birthDate")
     private Date birthDate;
-   
+    @HalProperty( name="name")
+    private Name name;
+    
     public Resource()
     {
 
     }
     
-    public Resource(Long id, String name, Date birthDate) {
+    public Resource(Long id, Name name, Date birthDate) {
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
@@ -74,6 +74,11 @@ public class Resource {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Resource{" + "id=" + id + ", birthDate=" + birthDate + ", name=" + name + '}';
+    }
+
 
     public Long getId() {
         return id;
@@ -83,11 +88,11 @@ public class Resource {
         this.id = id;
     }
 
-    public String getName() {
+    public Name getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Name name) {
         this.name = name;
     }
 

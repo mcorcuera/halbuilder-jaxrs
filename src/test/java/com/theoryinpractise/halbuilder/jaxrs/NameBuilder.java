@@ -15,29 +15,38 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.theoryinpractise.halbuilder.jaxrs.builders;
+package com.theoryinpractise.halbuilder.jaxrs;
 
-import java.sql.Date;
+import com.theoryinpractise.halbuilder.api.ReadableRepresentation;
+import com.theoryinpractise.halbuilder.impl.representations.MutableRepresentation;
+import com.theoryinpractise.halbuilder.jaxrs.builders.BuilderException;
+import com.theoryinpractise.halbuilder.jaxrs.builders.PropertyBuilder;
 
 /**
  *
  * @author Mikel Corcuera <mik.corcuera@gmail.com>
  */
-public class SqlDateBuilder implements PropertyBuilder<Date>{
+public class NameBuilder implements PropertyBuilder<Name>{
 
     @Override
-    public Date build(Object s) {
-        return Date.valueOf( (String)s);
+    public Name build(Object s) {
+        Name n = null;
+        
+        if( ReadableRepresentation.class.isAssignableFrom( s.getClass())) {
+            ReadableRepresentation r = (ReadableRepresentation) s;
+            n = new Name( (String) r.getValue("firstName"), (String) r.getValue("lastName"));
+        }
+        return n;
     }
 
     @Override
     public boolean canBuild(Class type) {
-        return Date.class.isAssignableFrom(type);
+        return Name.class.isAssignableFrom(type);
     }
 
     @Override
     public Class getBuildType() {
-        return Date.class;
+        return Name.class.getClass();
     }
     
 }

@@ -30,11 +30,11 @@ import java.util.logging.Logger;
 public class DateBuilder implements PropertyBuilder<Date>{
 
     @Override
-    public Date build(String s) {
+    public Date build(Object s) {
         Date date = null;
         try {
             SimpleDateFormat parser = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
-            date = parser.parse( s);
+            date = parser.parse( (String) s);
         } catch (ParseException ex) {
             Logger.getLogger(DateBuilder.class.getName()).log(Level.SEVERE, null, ex);
         }

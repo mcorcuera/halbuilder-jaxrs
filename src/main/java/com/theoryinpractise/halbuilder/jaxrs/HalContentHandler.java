@@ -17,11 +17,13 @@
 
 package com.theoryinpractise.halbuilder.jaxrs;
 
+import com.theoryinpractise.halbuilder.jaxrs.builders.BuilderException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
@@ -76,6 +78,7 @@ public class HalContentHandler implements MessageBodyWriter, MessageBodyReader<O
 
     @Override
     public boolean isReadable(Class<?> type, Type genericType, Annotation[] antns, MediaType mediaType) {
+        
         return mediaType.isCompatible(HAL_JSON_TYPE) 
                 || mediaType.isCompatible(HAL_XML_TYPE) 
                 || mediaType.isCompatible( JSON_TYPE);
@@ -83,9 +86,12 @@ public class HalContentHandler implements MessageBodyWriter, MessageBodyReader<O
 
     @Override
     public Object readFrom(Class<Object> type, Type type1, Annotation[] antns, MediaType mt, MultivaluedMap<String, String> mm, InputStream in) throws IOException, WebApplicationException {
-         Object o; 
+         Object o;
+         
         try {
            o = HalUnmarshaller.unmarshal(in, type);
+        }catch( BuilderException e) {
+            throw new BadRequestException( e);
         }catch( Exception e) {
             throw new InternalServerErrorException( e);
         }

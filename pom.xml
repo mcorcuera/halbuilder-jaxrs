@@ -37,6 +37,13 @@
             <version>3.0.1</version>
         </dependency>
         
+        
+        <dependency>
+            <groupId>com.theoryinpractise</groupId>
+            <artifactId>halbuilder-json</artifactId>
+            <version>3.1.5-CUSTOM</version>
+        </dependency>
+        
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

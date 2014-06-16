@@ -18,6 +18,8 @@
 package com.theoryinpractise.halbuilder.jaxrs;
 
 import com.theoryinpractise.halbuilder.api.ReadableRepresentation;
+import com.theoryinpractise.halbuilder.api.RepresentationException;
+import com.theoryinpractise.halbuilder.jaxrs.builders.BuilderException;
 import com.theoryinpractise.halbuilder.jaxrs.builders.PropertyBuilder;
 import com.theoryinpractise.halbuilder.jaxrs.builders.PropertyBuilderNotFoundException;
 import java.beans.PropertyDescriptor;
@@ -39,7 +41,7 @@ public class HalUnmarshaller {
         return getObjectFromRepresentation( r, type);
     }
     
-    private static Object getObjectFromRepresentation( ReadableRepresentation r, Class type) throws Exception
+    private static Object getObjectFromRepresentation( ReadableRepresentation r, Class type) throws BuilderException, Exception
     {        
         Object o = type.getConstructor().newInstance();
         
@@ -51,19 +53,25 @@ public class HalUnmarshaller {
                  final HalProperty halProperty = field.getAnnotation( HalProperty.class);
                  
                  if( halProperty != null) {
-                     String property = (String) r.getValue( halProperty.name());
-                     if( property != null) {
+                    Object property;
+                    try{ 
+                        property = r.getValue( halProperty.name());
+                    }catch( RepresentationException e) {
+                        property = null;
+                    }
+                    
+                    if( property != null) {
                          PropertyBuilder builder = HalContext.getPropertyBuilder( field.getType());
                          
                          if( builder == null)
                              throw new PropertyBuilderNotFoundException( field.getType());
-                         
+                        
                          Object builtProperty = builder.build(property);
+                            
                          new PropertyDescriptor(field.getName(), o.getClass()).getWriteMethod().invoke(o, builtProperty);
                      }
                  }
              }
-            
             type = type.getSuperclass();
         }
 
