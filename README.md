@@ -56,6 +56,7 @@ HalMarshaller.marshal( r, RepresentationFactory.HAL_JSON, System.out);
 ### Unmarshalling
 ```HalUnmarshaller.unmarshal```  is used for unmarshalling. It takes the object type an ``` InputStream ```  as input parameters:
 
+```java
 Resource r1 = new Resource( 124L, "John Doe", Date.valueOf("1991-03-18"));
         
 String representation = HalContext.getNewRepresentation().withBean(r1).toString( RepresentationFactory.HAL_JSON);
@@ -64,3 +65,32 @@ Resource r2 = null;
 InputStream is = new ByteArrayInputStream( representation.getBytes(StandardCharsets.UTF_8));
       
 r2 = (Resource) HalUnmarshaller.unmarshal(is, Resource.class);
+``` 
+
+### JAX-RS integration
+This libary also provides a content handler, ``` HalContentHandler ``` for JAX-RS based applications. It implements both ```MessageBodyWriter``` and ````MessageBodyReader```` interfaces. Once is registered as a Provider in the configuration the following code consumes and produces HAL representations transparently:
+
+```
+...
+@GET
+@Path("/resources/{id}"
+@Produces({ RepresentationFactory.HAL_JSON})
+public Resource getResource( @PathParam("id") Long id) {
+    Resource r = new Resource();
+    /* 
+        Retrieve resource from database
+    */
+    return r;
+}
+
+@POST
+@Path("/resources/{id}"
+@Consumes( {RepresentationFactory.HAL_JSON})
+public void saveResource( Resource r) {
+    /*
+        Store resource into database
+    */
+}
+```
+
+```
