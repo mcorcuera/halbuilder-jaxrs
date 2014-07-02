@@ -53,6 +53,7 @@ public class HalContext {
      static {
          rp = new StandardRepresentationFactory()
                     .withFlag( RepresentationFactory.PRETTY_PRINT)
+                    .withFlag( RepresentationFactory.STRIP_NULLS)
                     .withFlag( RepresentationFactory.SINGLE_ELEM_ARRAYS);
      }
      

@@ -42,7 +42,7 @@ public class HalMarshaller {
     
     public static void marshal( Object o, Set<URI> flags, String mediaType, OutputStream os) throws Exception
     {
-        Representation representation = getRepresentation( o);
+        Representation representation = getRepresentation( o, false);
         
         representation.toString( mediaType, flags, new OutputStreamWriter( os));
     }
@@ -57,7 +57,7 @@ public class HalMarshaller {
         marshal( o, null, mediaType, os);
     }
     
-    private static Representation getRepresentation( Object o) throws Exception
+    private static Representation getRepresentation( Object o, boolean embeddedElement) throws Exception
     {
         /*
         * Create new Representation for  o
@@ -70,17 +70,19 @@ public class HalMarshaller {
 
             final Field[] fields    = usingClass.getDeclaredFields();
             final Method[] methods  = usingClass.getDeclaredMethods();
-
+            
             /*
             * Inspect for annotated fields (properties and embedded Objects
             */
             for( final Field field : fields) {
                 final HalProperty property = field.getAnnotation( HalProperty.class);
                 final HalEmbedded embedded = field.getAnnotation( HalEmbedded.class);
+                
                 /*
                 * Include only annotated fields
                 */
                 if( property != null && property.input() == false ) {
+                    
                     /*
                     * Use getter to access field value
                     */
@@ -101,14 +103,15 @@ public class HalMarshaller {
                             * Add every element of a List
                             */
                             for( final Object ob : (List) embeddedObject) {
-                                rep.withRepresentation( embedded.value(), getRepresentation( ob));
+                                rep.withRepresentation( embedded.value(), getRepresentation( ob, true));
                             }
                         }else {
-                            rep.withRepresentation( embedded.value(), getRepresentation( embeddedObject));
+                            rep.withRepresentation( embedded.value(), getRepresentation( embeddedObject, true));
                         }
                     }
                 }
             }
+            
             /*
             * Inspect for annotated methods to get links
             */
