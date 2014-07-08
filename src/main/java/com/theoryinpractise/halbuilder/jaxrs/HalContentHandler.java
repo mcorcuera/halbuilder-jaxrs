@@ -72,7 +72,7 @@ public class HalContentHandler implements MessageBodyWriter, MessageBodyReader<O
             }else
                 throw new Exception( "Error creating HAL Representation of Object " + o);
         } catch( Exception e) {
-            throw new  InternalServerErrorException( e);
+            throw new  InternalServerErrorException( e.getMessage());
         }
     }
 
@@ -93,7 +93,7 @@ public class HalContentHandler implements MessageBodyWriter, MessageBodyReader<O
         }catch( BuilderException e) {
             throw new BadRequestException( e);
         }catch( Exception e) {
-            throw new InternalServerErrorException( e);
+            throw new InternalServerErrorException(  e.getMessage());
         }
         
         return o;

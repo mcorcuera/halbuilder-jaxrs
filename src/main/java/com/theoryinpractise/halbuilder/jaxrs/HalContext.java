@@ -19,6 +19,7 @@ package com.theoryinpractise.halbuilder.jaxrs;
 
 import com.theoryinpractise.halbuilder.api.Representation;
 import com.theoryinpractise.halbuilder.api.RepresentationFactory;
+import com.theoryinpractise.halbuilder.jaxrs.builders.BooleanBuilder;
 import com.theoryinpractise.halbuilder.jaxrs.builders.DateBuilder;
 import com.theoryinpractise.halbuilder.jaxrs.builders.IntegerBuilder;
 import com.theoryinpractise.halbuilder.jaxrs.builders.LongBuilder;
@@ -68,6 +69,7 @@ public class HalContext {
         registerPropertyBuilder( new SqlDateBuilder());
         registerPropertyBuilder( new IntegerBuilder());
         registerPropertyBuilder( new DateBuilder());
+        registerPropertyBuilder( new BooleanBuilder());
      }
      
     /**
