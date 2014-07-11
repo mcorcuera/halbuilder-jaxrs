@@ -72,6 +72,7 @@ public class HalContentHandler implements MessageBodyWriter, MessageBodyReader<O
             }else
                 throw new Exception( "Error creating HAL Representation of Object " + o);
         } catch( Exception e) {
+            System.out.println( e.getMessage());
             throw new  InternalServerErrorException( e.getMessage());
         }
     }
@@ -86,13 +87,14 @@ public class HalContentHandler implements MessageBodyWriter, MessageBodyReader<O
 
     @Override
     public Object readFrom(Class<Object> type, Type type1, Annotation[] antns, MediaType mt, MultivaluedMap<String, String> mm, InputStream in) throws IOException, WebApplicationException {
-         Object o;
+        Object o;
          
         try {
            o = HalUnmarshaller.unmarshal(in, type);
         }catch( BuilderException e) {
             throw new BadRequestException( e);
         }catch( Exception e) {
+            System.out.println( "HAL BuilderException: " + e.getMessage());
             throw new InternalServerErrorException(  e.getMessage());
         }
         

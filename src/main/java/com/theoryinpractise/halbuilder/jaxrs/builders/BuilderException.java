@@ -23,4 +23,15 @@ package com.theoryinpractise.halbuilder.jaxrs.builders;
  */
 public class BuilderException extends Exception{
     
+    public BuilderException() {
+        super();
+    }
+    
+    public BuilderException( String message) {
+        super( message);
+    }
+    
+    public BuilderException( Exception e) {
+        super( e);
+    }
 }
