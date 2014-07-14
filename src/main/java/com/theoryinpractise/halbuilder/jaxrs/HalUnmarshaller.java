@@ -51,6 +51,7 @@ public class HalUnmarshaller {
              
              for( final Field field : fields) {
                  final HalProperty halProperty = field.getAnnotation( HalProperty.class);
+                 final HalEmbedded halEmbedded = field.getAnnotation( HalEmbedded.class);
                  
                  if( halProperty != null) {
                     Object property;
@@ -70,6 +71,20 @@ public class HalUnmarshaller {
                             
                          new PropertyDescriptor(field.getName(), o.getClass()).getWriteMethod().invoke(o, builtProperty);
                      }
+                 }
+                 
+                 if( halEmbedded != null) {
+                     ReadableRepresentation embeddedRepresentation;
+                     try {
+                         embeddedRepresentation = r.getResourcesByRel( halEmbedded.value()).get(0);
+                     }catch( RepresentationException e) {
+                        embeddedRepresentation = null;
+                    }
+                     
+                    if( embeddedRepresentation != null) {
+                        Object embedded = getObjectFromRepresentation( embeddedRepresentation, field.getType());
+                        new PropertyDescriptor( field.getName(), o.getClass()).getWriteMethod().invoke(o, embedded);
+                    }
                  }
              }
             type = type.getSuperclass();

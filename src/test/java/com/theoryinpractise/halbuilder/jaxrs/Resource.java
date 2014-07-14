@@ -31,7 +31,7 @@ public class Resource {
     private Long id;
     @HalProperty( name="birthDate")
     private Date birthDate;
-    @HalProperty( name="name")
+    @HalEmbedded( "name")
     private Name name;
     
     public Resource()

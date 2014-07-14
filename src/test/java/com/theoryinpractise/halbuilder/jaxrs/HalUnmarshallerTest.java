@@ -72,7 +72,6 @@ public class HalUnmarshallerTest {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             HalMarshaller.marshal(r1, RepresentationFactory.HAL_JSON, baos);
             String representation = baos.toString( "UTF-8");
-            
             InputStream is = new ByteArrayInputStream( representation.getBytes(StandardCharsets.UTF_8));
             Object expResult = r1;
             HalContext.registerPropertyBuilder( new NameBuilder());

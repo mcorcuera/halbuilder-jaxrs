@@ -23,10 +23,13 @@ import java.util.Objects;
  *
  * @author Mikel Corcuera <mik.corcuera@gmail.com>
  */
+@HalRootElement
 public class Name {
     
+    @HalProperty( name="firstName")
     private String firstName;
    
+    @HalProperty( name="lastName")
     private String lastName;
 
     
