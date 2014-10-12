@@ -38,6 +38,9 @@ public class HalUnmarshaller {
         ReadableRepresentation r;
         r = HalContext.getRepresentationFactory().readRepresentation( new InputStreamReader( is));
         
+        if( r == null)
+            return null;
+        
         return getObjectFromRepresentation( r, type);
     }
     
@@ -66,7 +69,7 @@ public class HalUnmarshaller {
                          
                          if( builder == null)
                              throw new PropertyBuilderNotFoundException( field.getType());
-                        
+                         
                          Object builtProperty = builder.build(property);
                             
                          new PropertyDescriptor(field.getName(), o.getClass()).getWriteMethod().invoke(o, builtProperty);
@@ -77,7 +80,7 @@ public class HalUnmarshaller {
                      ReadableRepresentation embeddedRepresentation;
                      try {
                          embeddedRepresentation = r.getResourcesByRel( halEmbedded.value()).get(0);
-                     }catch( RepresentationException e) {
+                     }catch( Exception e) {
                         embeddedRepresentation = null;
                     }
                      

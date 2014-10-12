@@ -25,6 +25,7 @@ import com.theoryinpractise.halbuilder.jaxrs.builders.IntegerBuilder;
 import com.theoryinpractise.halbuilder.jaxrs.builders.LongBuilder;
 import com.theoryinpractise.halbuilder.jaxrs.builders.PropertyBuilder;
 import com.theoryinpractise.halbuilder.jaxrs.builders.SqlDateBuilder;
+import com.theoryinpractise.halbuilder.jaxrs.builders.TimestampBuilder;
 import com.theoryinpractise.halbuilder.standard.StandardRepresentationFactory;
 import java.util.HashMap;
 import java.util.Map;
@@ -70,6 +71,7 @@ public class HalContext {
         registerPropertyBuilder( new IntegerBuilder());
         registerPropertyBuilder( new DateBuilder());
         registerPropertyBuilder( new BooleanBuilder());
+        registerPropertyBuilder( new TimestampBuilder());
      }
      
     /**

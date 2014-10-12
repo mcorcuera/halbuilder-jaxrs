@@ -17,45 +17,32 @@
 
 package com.theoryinpractise.halbuilder.jaxrs.builders;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  *
  * @author Mikel Corcuera <mik.corcuera@gmail.com>
  */
-public class DateBuilder implements PropertyBuilder<Date>{
+public class TimestampBuilder implements PropertyBuilder<Timestamp>{
 
     @Override
-    public Date build(Object s) {
-        Date date = null;
-        try {
-            SimpleDateFormat parser = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss");
-            date = parser.parse( (String) s);
-        } catch (ParseException ex) {
-            
-        }
+    public Timestamp build(Object s) throws BuilderException {
         
-        if( date == null){
-            try{
-                long miliseconds = Long.parseLong((String)s);
-                date = new Date( miliseconds);
-            }catch( NumberFormatException ex) {
-                
-            }
-        }
-        return date;
+        long timeL = Long.parseLong( (String) s);
+        
+        Timestamp time = new Timestamp( timeL);
+        
+        return time;
     }
 
     @Override
     public boolean canBuild(Class type) {
-        return type.isAssignableFrom( Date.class);
+        return type.isAssignableFrom( Timestamp.class);
     }
 
     @Override
     public Class getBuildType() {
-        return Date.class;
+        return Timestamp.class;
     }
     
 }

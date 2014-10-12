@@ -18,6 +18,7 @@
 package com.theoryinpractise.halbuilder.jaxrs;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -31,8 +32,10 @@ public class Resource {
     private Long id;
     @HalProperty( name="birthDate")
     private Date birthDate;
+    
     @HalEmbedded( "name")
     private Name name;
+    
     
     public Resource()
     {
