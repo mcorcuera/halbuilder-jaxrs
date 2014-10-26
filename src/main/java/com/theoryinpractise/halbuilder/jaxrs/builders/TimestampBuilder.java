@@ -19,8 +19,8 @@ package com.theoryinpractise.halbuilder.jaxrs.builders;
 
 import java.sql.Timestamp;
 
-/**
- *
+/** 
+ * Property builder for java.sql.Timestamp objects
  * @author Mikel Corcuera <mik.corcuera@gmail.com>
  */
 public class TimestampBuilder implements PropertyBuilder<Timestamp>{

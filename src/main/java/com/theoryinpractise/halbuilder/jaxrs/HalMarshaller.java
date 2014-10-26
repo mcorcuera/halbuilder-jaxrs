@@ -29,17 +29,38 @@ import java.util.Set;
 import javax.ws.rs.core.MediaType;
 
 /**
- *
+ * This class contains the functionality to get the HAL representation of 
+ * a certain object. This object must be annotated with the {@link HalRootElement}
+ * and its properties, embedded objects and links with the corresponding annotation
+ * in order to be included in the representation.
  * @author Mikel Corcuera <mik.corcuera@gmail.com>
  */
 public class HalMarshaller {
     
-    
+    /**
+     * Creates the representation of one object for the desired media type. The
+     * representation is written in the provided output stream.
+     * @param o object to marshal
+     * @param flags configuration of the output format
+     * @param mediaType media type of the output
+     * @param os output stream to write the representation
+     * @throws Exception when an error creating the representation occurs
+     */
     public static void marshal( Object o, Set<URI> flags, MediaType mediaType, OutputStream os) throws Exception
     {
         marshal( o, flags, mediaType.toString(), os);
     }
     
+    
+    /**
+     * Creates the representation of one object for the desired media type. The
+     * representation is written in the provided output stream.
+     * @param o object to marshal
+     * @param flags configuration of the output format
+     * @param mediaType media type of the output
+     * @param os output stream to write the representation
+     * @throws Exception when an error creating the representation occurs
+     */ 
     public static void marshal( Object o, Set<URI> flags, String mediaType, OutputStream os) throws Exception
     {
         Representation representation = getRepresentation( o, false);
@@ -47,12 +68,28 @@ public class HalMarshaller {
         representation.toString( mediaType, flags, new OutputStreamWriter( os));
     }
     
+    /**
+     * Creates the representation of one object for the desired media type. The
+     * representation is written in the provided output stream.
+     * @param o object to marshal
+     * @param mediaType media type of the output
+     * @param os output stream to write the representation
+     * @throws Exception when an error creating the representation occurs
+     */
     public static void marshal( Object o, MediaType mediaType, OutputStream os) throws Exception
     {
         marshal( o, null, mediaType, os);
     }
     
-     public static void marshal( Object o, String mediaType, OutputStream os) throws Exception
+    /**
+     * Creates the representation of one object for the desired media type. The
+     * representation is written in the provided output stream.
+     * @param o object to marshal
+     * @param mediaType media type of the output
+     * @param os output stream to write the representation
+     * @throws Exception when an error creating the representation occurs
+     */
+    public static void marshal( Object o, String mediaType, OutputStream os) throws Exception
     {
         marshal( o, null, mediaType, os);
     }

@@ -28,11 +28,23 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 
 /**
- * 
+ * This class contains the functionality to unmarshal (or create) an object of a 
+ * certain type out of its HAL representation. This object must be annotated
+ * with the {@link HalRootElement} and its properties, embedded objects and links
+ * with the corresponding annotation
+ * in order to be read from the representation
  * @author Mikel Corcuera <mik.corcuera@gmail.com>
  */
 public class HalUnmarshaller {
     
+    /**
+     * This function return an Object resulting of the unmarshalling of a certain
+     * representation for a certain class
+     * @param is input stream from where to read the representation
+     * @param type object class to be build
+     * @return the object of class type created out of the representation
+     * @throws Exception  when an error creating the object occurs
+     */
     public static Object unmarshal( InputStream is, Class type) throws Exception
     {
         ReadableRepresentation r;

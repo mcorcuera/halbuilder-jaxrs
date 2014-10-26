@@ -17,18 +17,40 @@
 
 package com.theoryinpractise.halbuilder.jaxrs.builders;
 
-import com.theoryinpractise.halbuilder.api.ReadableRepresentation;
-import com.theoryinpractise.halbuilder.api.RepresentationException;
 
 /**
- *
+ * This interface provide functions to build a Java object based on the 
+ * HAL property in the HAL representation. Thus, classes implementing this 
+ * interface must provide with the logic to build the property for the class
+ * they are configured
  * @author Mikel Corcuera <mik.corcuera@gmail.com>
+ * @param <T> The object type that the PropertyBuilder can build.
  */
 public interface PropertyBuilder<T> {
         
+    /**
+     * This function takes the input parameter and builds it into an object
+     * of class <code>T</code>.
+     * @param s object to be converted in into an object
+     * of class <code>T</code>.
+     * @return the built object of class <code>T</code>
+     * @throws BuilderException when the function can not build the object out
+     * of the property input
+     */
     public T build( Object s) throws BuilderException;
     
+    /**
+     * This functions tells if the PropertyBuilder is able to build a object of 
+     * a certain class. This function will be use when not direct matching using
+     * getBuildType() is found.
+     * @param type the object class to build
+     * @return true if it is able to build an object of type class
+     */
     public boolean canBuild( Class type);
     
+    /**
+     * 
+     * @return the class of the build type of the class. That is, the class of T
+     */
     public Class getBuildType();
 }

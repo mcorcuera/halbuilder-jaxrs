@@ -18,11 +18,15 @@
 package com.theoryinpractise.halbuilder.jaxrs.builders;
 
 /**
- *
+ * This exception is thrown when trying to build a property of certain type and
+ * the necessary PropertyBuilder is not found
  * @author Mikel Corcuera <mik.corcuera@gmail.com>
  */
 public class PropertyBuilderNotFoundException extends Exception{
             
+    /**
+     * @param c the class of the property that could not be built
+     */
     public PropertyBuilderNotFoundException( Class c)
     {
         super( "PropertyBuilder for type " + c.toString() + " not found");

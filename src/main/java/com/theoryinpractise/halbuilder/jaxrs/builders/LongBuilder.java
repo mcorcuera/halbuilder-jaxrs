@@ -18,7 +18,7 @@
 package com.theoryinpractise.halbuilder.jaxrs.builders;
 
 /**
- *
+ * Property builder for Long objects
  * @author Mikel Corcuera <mik.corcuera@gmail.com>
  */
 public class LongBuilder implements PropertyBuilder<Long>{

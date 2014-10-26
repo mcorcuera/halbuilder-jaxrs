@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- *
+ *Property builder for java.util.Date objects
  * @author Mikel Corcuera <mik.corcuera@gmail.com>
  */
 public class DateBuilder implements PropertyBuilder<Date>{

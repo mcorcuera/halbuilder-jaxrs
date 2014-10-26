@@ -20,7 +20,7 @@ package com.theoryinpractise.halbuilder.jaxrs.builders;
 import java.sql.Date;
 
 /**
- *
+ *Property builder for java.sql.Date objects
  * @author Mikel Corcuera <mik.corcuera@gmail.com>
  */
 public class SqlDateBuilder implements PropertyBuilder<Date>{

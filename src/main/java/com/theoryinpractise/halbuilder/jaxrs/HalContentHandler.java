@@ -34,7 +34,9 @@ import javax.ws.rs.ext.Provider;
 
 
 /**
- *
+ * This class include the functionality of marshalling and unmarshalling objects
+ * in the HAL format in the JAX-RS application. For that, it implements 
+ * MessageBodyWritter and MessageBody Reader
  * @author Mikel Corcuera <mik.corcuera@gmail.com> 
  */
 @Provider
@@ -46,6 +48,14 @@ public class HalContentHandler implements MessageBodyWriter, MessageBodyReader<O
     
     private static final MediaType JSON_TYPE = new MediaType( "application", "json");
 
+    /**
+     *
+     * @param aClass
+     * @param type
+     * @param annotations
+     * @param mediaType
+     * @return
+     */
     @Override
     public boolean isWriteable(Class aClass, Type type, Annotation[] annotations, MediaType mediaType) {
         
@@ -56,13 +66,32 @@ public class HalContentHandler implements MessageBodyWriter, MessageBodyReader<O
                 && (mediaType.isCompatible(HAL_JSON_TYPE) || mediaType.isCompatible(HAL_XML_TYPE));
     }
 
-    
+    /**
+     *
+     * @param o
+     * @param aClass
+     * @param type
+     * @param annotations
+     * @param mediaType
+     * @return
+     */
     @Override
     public long getSize(Object o, Class aClass, Type type, Annotation[] annotations, MediaType mediaType) {
         return -1L;
     }
 
-    
+    /**
+     *
+     * @param o
+     * @param aClass
+     * @param type
+     * @param annotations
+     * @param mediaType
+     * @param headers
+     * @param outputStream
+     * @throws IOException
+     * @throws WebApplicationException
+     */
     @Override
     public void writeTo(Object o, Class aClass, Type type, Annotation[] annotations, MediaType mediaType, MultivaluedMap headers, OutputStream outputStream) throws IOException, WebApplicationException {
         
@@ -77,6 +106,14 @@ public class HalContentHandler implements MessageBodyWriter, MessageBodyReader<O
         }
     }
 
+    /**
+     *
+     * @param type
+     * @param genericType
+     * @param antns
+     * @param mediaType
+     * @return
+     */
     @Override
     public boolean isReadable(Class<?> type, Type genericType, Annotation[] antns, MediaType mediaType) {
         
@@ -85,6 +122,18 @@ public class HalContentHandler implements MessageBodyWriter, MessageBodyReader<O
                 || mediaType.isCompatible( JSON_TYPE);
     }
 
+    /**
+     *
+     * @param type
+     * @param type1
+     * @param antns
+     * @param mt
+     * @param mm
+     * @param in
+     * @return
+     * @throws IOException
+     * @throws WebApplicationException
+     */
     @Override
     public Object readFrom(Class<Object> type, Type type1, Annotation[] antns, MediaType mt, MultivaluedMap<String, String> mm, InputStream in) throws IOException, WebApplicationException {
         Object o;

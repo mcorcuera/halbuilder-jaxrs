@@ -18,7 +18,7 @@
 package com.theoryinpractise.halbuilder.jaxrs.builders;
 
 /**
- *
+ * Property builder for String
  * @author Mikel Corcuera <mik.corcuera@gmail.com>
  */
 public class StringBuilder implements PropertyBuilder<String>{

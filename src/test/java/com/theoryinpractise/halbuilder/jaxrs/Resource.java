@@ -36,12 +36,20 @@ public class Resource {
     @HalEmbedded( "name")
     private Name name;
     
-    
+    /**
+     *
+     */
     public Resource()
     {
 
     }
     
+    /**
+     *
+     * @param id
+     * @param name
+     * @param birthDate
+     */
     public Resource(Long id, Name name, Date birthDate) {
         this.id = id;
         this.name = name;
@@ -82,11 +90,18 @@ public class Resource {
         return "Resource{" + "id=" + id + ", birthDate=" + birthDate + ", name=" + name + '}';
     }
 
-
+    /**
+     *
+     * @return
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
@@ -99,10 +114,18 @@ public class Resource {
         this.name = name;
     }
 
+    /**
+     *
+     * @return
+     */
     public Date getBirthDate() {
         return birthDate;
     }
 
+    /**
+     *
+     * @param birthDate
+     */
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }

@@ -18,19 +18,30 @@
 package com.theoryinpractise.halbuilder.jaxrs.builders;
 
 /**
- *
+ * This exception is thrown when there is an error building a property into a 
+ * certain object type.
  * @author Mikel Corcuera <mik.corcuera@gmail.com>
  */
 public class BuilderException extends Exception{
     
+    /**
+     * Default constructor with no message
+     */
     public BuilderException() {
         super();
     }
     
+    /**
+     * @param message the message to be shown with the exception
+     */
     public BuilderException( String message) {
         super( message);
     }
     
+    /**
+     *
+     * @param e the exception causing this exception
+     */
     public BuilderException( Exception e) {
         super( e);
     }

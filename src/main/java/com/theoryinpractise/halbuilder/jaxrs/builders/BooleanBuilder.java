@@ -18,7 +18,7 @@
 package com.theoryinpractise.halbuilder.jaxrs.builders;
 
 /**
- *
+ * Property builder for boolean objects
  * @author Mikel Corcuera <mik.corcuera@gmail.com>
  */
 public class BooleanBuilder implements PropertyBuilder<Boolean>{
